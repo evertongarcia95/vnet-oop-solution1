@@ -2,12 +2,16 @@
 Models of product related databases
 """
 
-class Product:
+class Product(object):
     """ Base class of type Product """
     def __init__(self, ID_Product, Manufacturer, Price) -> None:
         self.ID_Product: int    = ID_Product
         self.Manufacturer: str  = Manufacturer
         self.Price: float       = Price
+
+    def getIDProduct(self) -> int:
+        """ Obtain ID of this product """
+        return self.ID_Product
 
     def setManufacturer(self, Manufacturer: str) -> None:
         """ Update manufacturer's of this product """

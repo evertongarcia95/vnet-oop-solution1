@@ -3,7 +3,7 @@ Models of people related databases
 """
 import datetime 
 
-class Person:
+class Person(object):
     """ Base class of type Person """
     def __init__(self, ID_Person: int, name: str, surname: str, address: str, phoneNumber: int, birthDate: datetime.date) -> None:
         self.ID_Person: int             = ID_Person
@@ -12,6 +12,10 @@ class Person:
         self.address: str               = address
         self.phoneNumber: int           = phoneNumber
         self.birthDate: datetime.date   = birthDate
+
+    def getIDPerson(self) -> int:
+        """ Obtain ID of this person """
+        return self.ID_Person
 
     def setFullName(self, name: str = None, surname: str = None) -> None:
         """ Update full name of this person """
@@ -54,6 +58,10 @@ class Customer(Person):
         self.ID_Customer: int               = ID_Customer
         self.RegisterDate: datetime.date    = RegisterDate
 
+    def getIDCustomer(self) -> int:
+        """ Obtain ID of this customer """
+        return self.ID_Customer
+
     def setRegisterDate(self, RegisterDate: datetime.date) -> None:
         """ Update the register date of this customer """
         self.RegisterDate = RegisterDate
@@ -67,8 +75,12 @@ class Seller(Person):
     """ Extended class of type Seller based on Person """
     def __init__(self, ID_Person: int, name: str, surname: str, address: str, phoneNumber: int, birthDate: datetime.date , ID_Seller: int, AdmissionDate: datetime.date) -> None:
         super (). __init__ (ID_Person, name, surname, address, phoneNumber, birthDate)
-        self.ID_Seller: int = ID_Seller
-        self.AdmissionDate: datetime.date = AdmissionDate
+        self.ID_Seller: int                 = ID_Seller
+        self.AdmissionDate: datetime.date   = AdmissionDate
+
+    def getIDSeller(self) -> int:
+        """ Obtain ID of this seller """
+        return self.ID_Seller
 
     def setAdmissionDate(self, AdmissionDate: datetime.date) -> None:
         """ Update the admission date of this customer """

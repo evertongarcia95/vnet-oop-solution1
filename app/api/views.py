@@ -1,0 +1,4 @@
+"""
+Views of the application
+"""
+
