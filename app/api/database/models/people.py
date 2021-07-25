@@ -5,17 +5,15 @@ import datetime
 
 class Person(object):
     """ Base class of type Person """
-    def __init__(self, ID_Person: int, name: str, surname: str, address: str, phoneNumber: int, birthDate: datetime.date) -> None:
-        self.ID_Person: int             = ID_Person
+    def __init__(self, name: str, surname: str, address: str, phoneNumber: int, birthDate: datetime.date) -> None:
         self.name: str                  = name
         self.surname: str               = surname
         self.address: str               = address
         self.phoneNumber: int           = phoneNumber
         self.birthDate: datetime.date   = birthDate
 
-    def getIDPerson(self) -> int:
-        """ Obtain ID of this person """
-        return self.ID_Person
+    def __str__(self) -> str:
+        return "|%10s|%10s|%15s|%10s|%10s| " % (str(self.name),str(self.surname),str(self.address),str(self.phoneNumber),str(self.birthDate))
 
     def setFullName(self, name: str = None, surname: str = None) -> None:
         """ Update full name of this person """
@@ -53,39 +51,33 @@ class Person(object):
 
 class Customer(Person):
     """ Extended class of type Customer based on Person """
-    def __init__(self, ID_Person: int, name: str, surname: str, address: str, phoneNumber: int, birthDate: datetime.date , ID_Customer: int, RegisterDate: datetime.date) -> None:
-        super (). __init__ (ID_Person, name, surname, address, phoneNumber, birthDate)
-        self.ID_Customer: int               = ID_Customer
-        self.RegisterDate: datetime.date    = RegisterDate
+    def __init__(self, name: str, surname: str, address: str, phoneNumber: int, birthDate: datetime.date , registerDate: datetime.date) -> None:
+        super (). __init__ (name, surname, address, phoneNumber, birthDate)
+        self.registerDate: datetime.date = registerDate
 
-    def getIDCustomer(self) -> int:
-        """ Obtain ID of this customer """
-        return self.ID_Customer
+    def __str__(self) -> str:
+        return "|%s|%11s| " % (super().__str__(), str(self.registerDate))
 
-    def setRegisterDate(self, RegisterDate: datetime.date) -> None:
+    def setRegisterDate(self, registerDate: datetime.date) -> None:
         """ Update the register date of this customer """
-        self.RegisterDate = RegisterDate
+        self.registerDate = registerDate
 
     def getRegisterDate(self) -> datetime.date:
         """ Obtain the register date of this customer """
-        return self.RegisterDate
+        return self.registerDate
 
 
 class Seller(Person):
     """ Extended class of type Seller based on Person """
-    def __init__(self, ID_Person: int, name: str, surname: str, address: str, phoneNumber: int, birthDate: datetime.date , ID_Seller: int, AdmissionDate: datetime.date) -> None:
-        super (). __init__ (ID_Person, name, surname, address, phoneNumber, birthDate)
-        self.ID_Seller: int                 = ID_Seller
-        self.AdmissionDate: datetime.date   = AdmissionDate
+    def __init__(self, name: str, surname: str, address: str, phoneNumber: int, birthDate: datetime.date , admissionDate: datetime.date) -> None:
+        super (). __init__ (name, surname, address, phoneNumber, birthDate)
+        self.admissionDate: datetime.date = admissionDate
 
-    def getIDSeller(self) -> int:
-        """ Obtain ID of this seller """
-        return self.ID_Seller
-
-    def setAdmissionDate(self, AdmissionDate: datetime.date) -> None:
+    def setAdmissionDate(self, admissionDate: datetime.date) -> None:
         """ Update the admission date of this customer """
-        self.AdmissionDate = AdmissionDate
+        self.admissionDate = admissionDate
 
     def getAdmissionDate(self) -> datetime.date:
         """ Obtain the admission date of this customer """
-        return self.AdmissionDate
+        return self.admissionDate
+
