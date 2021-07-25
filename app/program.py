@@ -36,7 +36,7 @@ def main():
             mngtChoice = -1
 
         # Caso o usuario não entre com um numero
-        if mngtChoice in [1,2,3,4]:
+        if mngtChoice in [1,2,3]:
             # Then ask what to do with databases
             print("#" + "-" * 79)
             print("Select which action now:")
@@ -70,15 +70,21 @@ def main():
                 result = listAllRecords(tableTypes(mngtChoice))
 
             # Inform operator if the operation succeeded or not
-            print("#" + "-" * 79)
             if result:
-                print("Success!")
+                print("\nSuccess!")
             else:
-                print("Error!")
+                print("\nError!")
 
             # Wait the user press any key before clear the screen
             #   and wait for new input
-            input("Press <ENTER> to continue...")
+            input("\nPress <ENTER> to continue...")
+        elif mngtChoice == 4:
+            # TO BE DONE...
+            print("\nSales management under development...")
+
+            # Wait the user press any key before clear the screen
+            #   and wait for new input
+            input("\nPress <ENTER> to continue...")
         else:
             # Quit the looping
             print("\nSee you soon!\n")

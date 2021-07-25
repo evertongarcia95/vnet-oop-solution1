@@ -27,30 +27,47 @@ appDatabase = Database()
 def createRecord(recordType: tableTypes) -> bool:
     """ Function to handle addition of records to the table """
     try:
-        if recordType == tableTypes.CUSTOMER:
+        if recordType == tableTypes.CUSTOMER or recordType == tableTypes.SELLER:
             print("#" + "-" * 79)
-            print("Adding customer")
+            print("Adding %s" % ("customer" if recordType == tableTypes.CUSTOMER else "seller"))
             print("#" + "-" * 79)
 
-            custName    = str(input("Name: ") or "Joao")
-            custSurname = str(input("Surname: ") or "da Silva")
-            custAddress = str(input("Address: ") or "R dos Andradas 1011")
-            custPhone   = int(input("Phone number: ") or "0119992993")
+            # Get the entry values from the user
+            personName    = str(input("Name: ") or "Joao")
+            personSurname = str(input("Surname: ") or "da Silva")
+            personAddress = str(input("Address: ") or "R dos Andradas 1011")
+            personPhone   = int(input("Phone number: ") or "0119992993")
             print("Birth date:")
-            custBirth   = datetime(int(input("\tyear:") or "2021"), int(input("\tmonth:") or "1"), int(input("\tday:") or "1"))
+            personBirth   = datetime(int(input("\tyear:") or "2021"), int(input("\tmonth:") or "1"), int(input("\tday:") or "1"))
 
             # Object instance
-            objCustomer = Customer(custName, custSurname, custAddress, custPhone, custBirth, datetime.today())
+            objPerson = None    # using reference to base of Customer and Seller (Person)
+
+            # Update obbject instance according to user's choice
+            if recordType == tableTypes.CUSTOMER:
+                objPerson = Customer(personName, personSurname, personAddress, personPhone, personBirth, datetime.today())
+            elif recordType == tableTypes.SELLER:
+                objPerson = Seller(personName, personSurname, personAddress, personPhone, personBirth, datetime.today())
 
             # Adding to the database
-            appDatabase.add(objCustomer)
-
-        elif recordType == tableTypes.SELLER:
-            print("adding seller")
+            appDatabase.add(objPerson)
         elif recordType == tableTypes.PRODUCT:
-            print("adding product")
+            print("#" + "-" * 79)
+            print("Adding product")
+            print("#" + "-" * 79)
+
+            # Get the entry values from the user
+            prodDesc    = str(input("Product: ") or "Soccer ball")
+            prodManuf   = str(input("Manufacturer: ") or "Penalty")
+            prodPrice   = float(input("Price: ") or "10.0")
+
+            # Object instance
+            objProduct = Product(prodDesc, prodManuf, prodPrice)
+
+            # Adding to the database
+            appDatabase.add(objProduct)
         elif recordType == tableTypes.SALE:
-            print("adding sale")
+            pass    # TO BE DONE
         else:
             raise Exception("Error!")
     except:

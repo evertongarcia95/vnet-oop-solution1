@@ -4,27 +4,36 @@ Models of product related databases
 
 class Product(object):
     """ Base class of type Product """
-    def __init__(self, ID_Product, Manufacturer, Price) -> None:
-        self.ID_Product: int    = ID_Product
-        self.Manufacturer: str  = Manufacturer
-        self.Price: float       = Price
+    def __init__(self, Product:str, Manufacturer:str, Price:float) -> None:
+        self.product: str       = Product
+        self.manufacturer: str  = Manufacturer
+        self.price: float       = Price
 
-    def getIDProduct(self) -> int:
-        """ Obtain ID of this product """
-        return self.ID_Product
+    def __str__(self) -> str:
+        return "|%25s|%25s|%12s|" % (str(self.getProduct()),
+            str(self.getManufacturer()),
+            str("US$ %.2f" % self.getPrice()))
+
+    def setProduct(self, Product: str) -> None:
+        """ Update product's description """
+        self.product = Product
+
+    def getProduct(self) -> str:
+        """ Obtain this product's description """
+        return self.product
 
     def setManufacturer(self, Manufacturer: str) -> None:
         """ Update manufacturer's of this product """
-        self.Manufacturer = Manufacturer
+        self.manufacturer = Manufacturer
 
     def getManufacturer(self) -> str:
         """ Obtain manufacturer's of this product """
-        return self.Manufacturer
+        return self.manufacturer
 
     def setPrice(self, Price: float) -> None:
         """ Update the price of this product """
-        self.Price = Price
+        self.price = Price
 
     def getPrice(self) -> float:
         """ Obtain the price of this product """
-        return self.Price
+        return self.price

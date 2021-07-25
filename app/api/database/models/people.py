@@ -13,11 +13,10 @@ class Person(object):
         self.birthDate: datetime.date   = birthDate
 
     def __str__(self) -> str:
-        return "|%10s|%10s|%25s|%10s|%11s|" % (str(self.name),
-            str(self.surname),
-            str(self.address),
-            str(self.phoneNumber),
-            str(self.birthDate.strftime("%m/%d/%Y")))
+        return "|%20s|%25s|%10s|%11s|" % (str(self.getFullName()),
+            str(self.getAddress()),
+            str(self.getPhoneNumber()),
+            str(self.getBirthDate().strftime("%m/%d/%Y")))
 
     def setFullName(self, name: str = None, surname: str = None) -> None:
         """ Update full name of this person """
@@ -60,7 +59,7 @@ class Customer(Person):
         self.registerDate: datetime.date = registerDate
 
     def __str__(self) -> str:
-        return "%s%11s|" % (super().__str__(), str(self.registerDate.strftime("%m/%d/%Y")))
+        return "%s%11s|" % (super().__str__(), str(self.getRegisterDate().strftime("%m/%d/%Y")))
 
     def setRegisterDate(self, registerDate: datetime.date) -> None:
         """ Update the register date of this customer """
@@ -76,6 +75,9 @@ class Seller(Person):
     def __init__(self, name: str, surname: str, address: str, phoneNumber: int, birthDate: datetime.date , admissionDate: datetime.date) -> None:
         super (). __init__ (name, surname, address, phoneNumber, birthDate)
         self.admissionDate: datetime.date = admissionDate
+
+    def __str__(self) -> str:
+        return "%s%11s|" % (super().__str__(), str(self.getAdmissionDate().strftime("%m/%d/%Y")))
 
     def setAdmissionDate(self, admissionDate: datetime.date) -> None:
         """ Update the admission date of this customer """
