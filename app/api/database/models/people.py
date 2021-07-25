@@ -18,6 +18,22 @@ class Person(object):
             str(self.getPhoneNumber()),
             str(self.getBirthDate().strftime("%m/%d/%Y")))
 
+    def setName(self, name: str) -> None:
+        """ Update name of this person """
+        self.name = name
+
+    def getName(self) -> str:
+        """ Obtain name of this person """
+        return self.name
+
+    def setSurname(self, surname: str) -> None:
+        """ Update surname of this person """
+        self.surname = surname
+
+    def getSurname(self) -> str:
+        """ Obtain surname of this person """
+        return self.surname
+
     def setFullName(self, name: str = None, surname: str = None) -> None:
         """ Update full name of this person """
         if name:    self.name       = name
@@ -39,7 +55,7 @@ class Person(object):
         """ Update the phone number of this person """
         self.phoneNumber = phoneNumber
 
-    def getPhoneNumber(self) -> str:
+    def getPhoneNumber(self) -> int:
         """ Obtain the phone number of this person """
         return self.phoneNumber
 

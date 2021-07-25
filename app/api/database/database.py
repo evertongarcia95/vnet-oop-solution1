@@ -50,6 +50,21 @@ class Database(object):
             return False
 
 
+    def getRecord(self, recordType: tableTypes, idToGet: int):
+        """ Public method to get register from the database """
+        try:
+            if recordType == tableTypes.CUSTOMER:
+                return self.tableCustomer.get(idToGet)
+            elif recordType == tableTypes.SELLER:
+                return self.tableSeller.get(idToGet)
+            elif recordType == tableTypes.PRODUCT:
+                return self.tableProduct.get(idToGet)
+            else:
+                raise Exception("Error!")
+        except:
+            return None
+
+
     def remove(self, recordType: tableTypes, idToRemove: int) -> bool:
         """ Public method to remove a register from the database """
         try:
@@ -69,14 +84,21 @@ class Database(object):
             return False
 
 
-    def update(self, objData) -> bool:
+    def update(self, objData, idToUpdate:int) -> bool:
         """ Public method to modify a register of the database """
         try:
-            pass
+            if (type(objData) == Customer):
+                self.tableCustomer[idToUpdate]  = objData
+            elif (type(objData) == Seller):
+                self.tableSeller[idToUpdate]    = objData
+            elif (type(objData) == Product):
+                self.tableProduct[idToUpdate]   = objData
+            else:
+                raise Exception("Error!")
+
+            return True
         except:
             return False
-        finally:
-            return True
 
 
     def list(self, recordType: tableTypes) -> bool:
