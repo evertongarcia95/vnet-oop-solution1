@@ -5,9 +5,9 @@ Models of product related databases
 class Product(object):
     """ Base class of type Product """
     def __init__(self, Product:str, Manufacturer:str, Price:float) -> None:
-        self.product: str       = Product
-        self.manufacturer: str  = Manufacturer
-        self.price: float       = Price
+        self.__product: str       = Product
+        self.__manufacturer: str  = Manufacturer
+        self.__price: float       = Price
 
     def __str__(self) -> str:
         return "|%25s|%25s|%12s|" % (str(self.getProduct()),
@@ -16,24 +16,24 @@ class Product(object):
 
     def setProduct(self, Product: str) -> None:
         """ Update product's description """
-        self.product = Product
+        self.__product = Product
 
     def getProduct(self) -> str:
         """ Obtain this product's description """
-        return self.product
+        return self.__product
 
     def setManufacturer(self, Manufacturer: str) -> None:
         """ Update manufacturer's of this product """
-        self.manufacturer = Manufacturer
+        self.__manufacturer = Manufacturer
 
     def getManufacturer(self) -> str:
         """ Obtain manufacturer's of this product """
-        return self.manufacturer
+        return self.__manufacturer
 
     def setPrice(self, Price: float) -> None:
         """ Update the price of this product """
-        self.price = Price
+        self.__price = Price
 
     def getPrice(self) -> float:
         """ Obtain the price of this product """
-        return self.price
+        return self.__price
