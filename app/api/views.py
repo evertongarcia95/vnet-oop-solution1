@@ -70,10 +70,10 @@ def createRecord(recordType: tableTypes) -> bool:
             pass    # TO BE DONE
         else:
             raise Exception("Error!")
+
+        return True
     except:
         return False
-    finally:
-        return True
 
 
 def readRecord(recordType: tableTypes) -> bool:
@@ -89,10 +89,10 @@ def readRecord(recordType: tableTypes) -> bool:
             print("reading sale")
         else:
             raise Exception("Error!")
+
+        return True
     except:
         return False
-    finally:
-        return True
 
 
 def updateRecord(recordType: tableTypes) -> bool:
@@ -108,29 +108,46 @@ def updateRecord(recordType: tableTypes) -> bool:
             print("updating sale")
         else:
             raise Exception("Error!")
+
+        return True
     except:
         return False
-    finally:
-        return True
 
 
 def deleteRecord(recordType: tableTypes) -> bool:
     """ Function to delete records from the table """
+
     try:
+        hdrType: str
         if recordType == tableTypes.CUSTOMER:
-            print("deleting customer")
+            hdrType = "customer"
         elif recordType == tableTypes.SELLER:
-            print("deleting seller")
+            hdrType = "seller"
         elif recordType == tableTypes.PRODUCT:
-            print("deleting product")
+            hdrType = "product"
         elif recordType == tableTypes.SALE:
-            print("deleting sale")
+            hdrType = "sale"
         else:
             raise Exception("Error!")
+
+        # Header to show user what is going on
+        print("#" + "-" * 79)
+        print(f"Deleting a {hdrType}")
+        print("#" + "-" * 79)
+
+        # Fist, show current records
+        appDatabase.list(recordType)
+
+        # Then ask the operator which ID to remove
+        idToRemove = int(input("Which ID to delete: ") or "-1")
+
+        # Try to remove (what could return error if ID does not exist)
+        if appDatabase.remove(recordType, idToRemove):
+            return True
+        else:
+            return False
     except:
         return False
-    finally:
-        return True
 
 
 def listAllRecords(recordType: tableTypes) -> bool:

@@ -42,20 +42,31 @@ class Database(object):
                 self.tableSeller[self.__nextID(self.tableSeller)]       = objData
             elif (type(objData) == Product):
                 self.tableProduct[self.__nextID(self.tableProduct)]     = objData
+            else:
+                raise Exception("Error!")
+
+            return True
         except:
             return False
-        finally:
-            return True
 
 
-    def remove(self, objData) -> bool:
+    def remove(self, recordType: tableTypes, idToRemove: int) -> bool:
         """ Public method to remove a register from the database """
         try:
-            pass
+            # Depending on record type try to remove it using the infored ID
+            #   if it does not exist, or other issue, returns an error
+            if recordType == tableTypes.CUSTOMER:
+                del self.tableCustomer[idToRemove]
+            elif recordType == tableTypes.SELLER:
+                del self.tableSeller[idToRemove]
+            elif recordType == tableTypes.PRODUCT:
+                del self.tableProduct[idToRemove]
+            else:
+                raise Exception("Error!")
+
+            return True
         except:
             return False
-        finally:
-            return True
 
 
     def update(self, objData) -> bool:
@@ -102,7 +113,7 @@ class Database(object):
                 print("Listing sales... To be done!")
             else:
                 raise Exception("Error!")
+
+            return True
         except:
             return False
-        finally:
-            return True
