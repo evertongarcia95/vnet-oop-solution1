@@ -33,17 +33,17 @@ class Database(object):
 
     def add(self, objData) -> bool:
         """ Public method to add a new register into the database """
-        #try:
-        if (type(objData) == Customer):
-            self.tableCustomer[self.__nextID(self.tableCustomer)]   = objData
-        elif (type(objData) == Seller):
-            self.tableSeller[self.__nextID(self.tableSeller)]       = objData
-        elif (type(objData) == Product):
-            self.tableProduct[self.__nextID(self.tableProduct)]     = objData
-        #except:
-        #    return False
-        #finally:
-        #    return True
+        try:
+            if (type(objData) == Customer):
+                self.tableCustomer[self.__nextID(self.tableCustomer)]   = objData
+            elif (type(objData) == Seller):
+                self.tableSeller[self.__nextID(self.tableSeller)]       = objData
+            elif (type(objData) == Product):
+                self.tableProduct[self.__nextID(self.tableProduct)]     = objData
+        except:
+            return False
+        finally:
+            return True
 
 
     def remove(self, objData) -> bool:
@@ -71,12 +71,13 @@ class Database(object):
         try:
             if recordType == tableTypes.CUSTOMER:
                 # Table header
-                print("#" + "-" * 79)
+                print("#" + "-" * 88)
                 print("# List of customer ")
-                print("#" + "-" * 79)
-                print("|%4s|%10s|%10s|%15s|%10s|%10s|%11s| " % ("ID","Name","Surname","Address","Phone","Birthdate","Registered"))
-                for record in self.tableCustomer:
-                    print(record)
+                print("#" + "-" * 88)
+                print("|%4s|%10s|%10s|%25s|%10s|%11s|%11s| " % ("ID","Name","Surname","Address","Phone","Birthdate","Registered"))
+                print("#" + "-" * 88)
+                for recordIdx in self.tableCustomer:
+                    print("|%4s%s" % (str(recordIdx), self.tableCustomer[recordIdx]))
             elif recordType == tableTypes.SELLER:
                 print("reading seller")
             elif recordType == tableTypes.PRODUCT:
